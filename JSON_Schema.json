@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://accessibilite.public.lu/docs/audit.schema.json",
+  "title": "JSON validation schema for accessibility audits",
+  "description": "This schema is used for RGAA, RAWeb and RAAM audits, in order to be published on the Digital accessibility observatory",
+  "type": "object",
+  "properties": {
+    "auditor": {
+      "type": "string",
+      "description": "Name of the auditor.  Can be left as 'Non renseigné'"
+    },
+    "context": {
+      "type": "string",
+      "description": "Please specify here which body requested the audit, which company carried it out and whether it is an initial audit or a second control audit. Can be left as 'Non renseigné'"
+    },
+    "audited_at": {
+      "type": "string",
+      "description": "The date the audit was completed. Date format: yyyy-mm-dd",
+      "format": "date"
+    },
+    "inventory": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the inventory item is used here as an identifier. It must therefore be copied exactly from the Excel file present on the Open data: https://data.public.lu/fr/datasets/inventaire-des-sites-publics/"
+        }
+      },
+      "required": ["name"]
+    },
+    "platform": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["Web", "iOS", "Android"],
+          "description": "One of the three keywords: Web, iOS or Android"
+        }
+      },
+      "required": ["name"]
+    },
+    "audit_reference": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["RGAA", "RAWeb", "RAAM"],
+          "description": "One of the three keywords: RGAA, RAWeb, RAAM"
+        }
+      },
+      "required": ["name"]
+    },
+    "control_type": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["Complet", "Mobile", "Simplifié"],
+          "description": "One of the three keywords: Complet, Mobile, Simplifié"
+        }
+      },
+      "required": ["name"]
+    },
+    "assessed_level": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["A", "AA"],
+          "description": "One of the two keywords: A, AA"
+        }
+      },
+      "required": ["name"]
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Page or screen number between 1 and 20"
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI of the page. For mobile audit, title or short description of the screen"
+          },
+          "assessments": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/crit" }
+          }
+        },
+        "required": [
+          "number",
+          "uri",
+          "assessments"
+        ]
+      }
+    }
+  },
+  "required": [
+    "auditor",
+    "context",
+    "audited_at",
+    "inventory",
+    "platform",
+    "audit_reference",
+    "control_type",
+    "assessed_level",
+    "pages"
+  ],
+  "$defs": {
+    "crit": {
+      "type": "object",
+      "properties": {
+        "criterion": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "string",
+              "pattern": "^\\d{1,2}\\.\\d{1,2}$"
+            }
+          },
+          "required": [ "number" ]
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": ["C", "NC", "NA", "NT"]
+            }
+          },
+          "required": [ "name" ]
+        },
+        "exemption": {
+          "type": "boolean",
+          "description": "false by default, true if the criterion can be exempted"
+        },
+        "exemption_comment": {
+          "type": "string",
+          "description": "Optional"
+        },
+        "changes_to_do": {
+          "type": "string",
+          "description": "Optional"
+        },
+        "patches_follow_up": {
+          "type": "string",
+          "description": "Optional"
+        }
+      },
+      "required": [ 
+        "criterion", 
+        "status", 
+        "exemption", 
+        "exemption_comment", 
+        "changes_to_do", 
+        "patches_follow_up" 
+      ]
+    }
+  }
+}

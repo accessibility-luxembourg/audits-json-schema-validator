@@ -1,0 +1,7 @@
+{
+    "require": {
+        "swaggest/json-schema": "^0.12.43",
+        "justinrainbow/json-schema": "^6.0",
+        "opis/json-schema": "^2.4"
+    }
+}

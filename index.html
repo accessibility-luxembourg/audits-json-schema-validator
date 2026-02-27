@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Validation d'audit de conformité</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, viewport-fit=auto"/>
+        <script>
+            var _validFileExtensions = [".json"];    
+            function Validate(oForm) {
+                var arrInputs = oForm.getElementsByTagName("input");
+                for (var i = 0; i < arrInputs.length; i++) {
+                    var oInput = arrInputs[i];
+                    if (oInput.type == "file") {
+                        var sFileName = oInput.value;
+                        if (sFileName.length > 0) {
+                            var blnValid = false;
+                            var sCurExtension = ".json";
+                            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                                blnValid = true;
+                                newFileRequest();
+                            }
+                            if (!blnValid) {
+                                alert("Désolé, " + sFileName + " n'est pas autorisé, seule l'extension .json l'est.");
+                            }
+                        } else {
+                            alert("Choisissez d'abord un fichier")
+                        }
+                    }
+                }
+            }
+
+            function newFileRequest() {
+                const input = document.querySelector('input[type="file"]');
+                const data = new FormData();
+                data.append('file', input.files[0]);
+                fetch('audit_validator.php', {
+                        method: 'POST',
+                        body: data
+                })
+                .then(response => response.text())
+                .then(response => newFileRequestFeedback(response))
+            }
+
+            function newFileRequestFeedback (output) {
+                document.getElementById('output').innerHTML = output;
+            }
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600&display=swap');
+            
+            body {
+                font-family: "Fira Sans";
+                max-width: 700px;
+                margin: auto;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            form {
+
+            }
+
+            pre {
+                font-weight: 300;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Validez votre audit au format JSON</h1>
+        <form method="post" action="audit_validator.php" enctype="multipart/form-data">
+            <p>Sélectionnez votre fichier</p>
+            <input type="file" name="SIPfileToUpload" id="fileToUpload">
+            <input type="button" onclick="Validate(this.parentElement)" value="Envoyer le fichier">
+        </form>
+        <pre id="output"></pre>
+    </body>
+</html>
