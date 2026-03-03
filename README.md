@@ -2,7 +2,7 @@
 
 In Luxembourg, all audits managed by the Information and Press service are available in the [Digital Accessibility Observatory](https://observatoire.accessibilite.public.lu/en/home).
 For this to work, all accessibility reports produced in the context of the Web Accessibility Directive monitoring must be made available in JSON format.
-This project defines the [JSON Schema](./JSON_Schema.json) to be respected ([check our documentation here](https://accessibility-luxembourg.github.io/audits-json-schema-validator/), and also a tool to help validating JSON files in this format.
+This project defines the [JSON Schema](./JSON_Schema.json) to be respected ([check our documentation here](https://accessibility-luxembourg.github.io/audits-json-schema-validator/)), and also a tool to help validating JSON files in this format.
 
 If you use our [template Excel files](https://accessibilite.public.lu/en/tools/kit.html), you can convert them to JSON with our tool named ["audit-excel2json"](https://github.com/accessibility-luxembourg/audit-excel2json). 
 
