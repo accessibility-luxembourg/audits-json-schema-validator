@@ -32,7 +32,7 @@ Please create also a folder named "uploads" in this project. This will receive t
 
 ### Basic Usage
 
-Load the index.html with your web broser from your local webserver. Upload your JSON file and check the results.
+Load the index.html with your web browser from your local webserver. Upload your JSON file and check the results.
 
 ### Batch mode
 
