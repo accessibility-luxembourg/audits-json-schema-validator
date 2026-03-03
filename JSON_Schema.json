@@ -46,9 +46,13 @@
           "type": "string",
           "enum": ["RGAA", "RAWeb", "RAAM"],
           "description": "One of the three keywords: RGAA, RAWeb, RAAM"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the framework (1 or 1.1 for RAWeb or RAAM)"
         }
       },
-      "required": ["name"]
+      "required": ["name", "version"]
     },
     "control_type": {
       "type": "object",
