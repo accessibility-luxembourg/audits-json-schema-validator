@@ -7,7 +7,7 @@
   "properties": {
     "auditor": {
       "type": "string",
-      "description": "Name of the auditor.  Can be left as 'Non renseigné'"
+      "description": "Name of the company that carried out the audit.  Can be left as 'Non renseigné'"
     },
     "context": {
       "type": "string",
