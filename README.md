@@ -14,6 +14,12 @@ If you use our [template Excel files](https://accessibilite.public.lu/en/tools/k
 ## Examples
 You can find some examples of audit files in JSON in the ["examples"](./examples) folder. All these files comply with the JSON schema.
 
+### Optional page title
+
+Each item in `pages` may include an optional `title` string containing
+the page or screen title recorded at the time of the audit.
+Existing JSON files without this property remain valid.
+
 ## Installation
 
 You should have PHP installed on your computer with a webserver. PHP should also be available in CLI.

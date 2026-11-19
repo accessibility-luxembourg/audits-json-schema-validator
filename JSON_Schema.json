@@ -90,6 +90,10 @@
             "type": "string",
             "description": "URI of the page. For mobile audit, title or short description of the screen"
           },
+          "title": {
+            "type": "string",
+            "description": "Optional page or screen title recorded at the time of the audit."
+          },
           "assessments": {
             "type": "array",
             "items": { "$ref": "#/$defs/crit" }
